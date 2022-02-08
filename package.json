@@ -44,7 +44,6 @@
   "scripts": {
     "start": "webpack-dev-server --inline --progress",
     "build": "tsc -p ./tsconfig.esm.json && tsc -p ./tsconfig.umd.json",
-    "prebuild": "mkdirp dist && del ./dist/*",
     "prepare": "yarn build"
   }
 }

@@ -58,9 +58,11 @@ interface Coordinates {
 export default function createScrollSnap(
   element: HTMLElement,
   settings: Settings = {},
-  callback: () => void
+  callback: () => void,
+  startCallback: () => void
 ) {
   const onAnimationEnd = typeof callback === 'function' ? callback : NOOP
+  const onAnimationStart = typeof startCallback === 'function' ? startCallback : NOOP
 
   let listenerElement: HTMLElement | Window
   let target: HTMLElement
@@ -227,6 +229,7 @@ export default function createScrollSnap(
     listenerElement.removeEventListener('scroll', startAnimation, false)
 
     animating = true
+    onAnimationStart();
 
     // smoothly move to the snap point
     smoothScroll(target, snapPoint, () => {
